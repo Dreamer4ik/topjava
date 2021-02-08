@@ -17,6 +17,8 @@
     <h3><a href="index.html">Home</a></h3>
     <hr>
     <h2>Meals</h2>
+    <a href="meal?action = create"> Add Meal</a>
+    <br><br>
     <table border="1" cellpadding="8" cellspacing="0">
 
         <tr>
@@ -30,6 +32,9 @@
                 <td>${meal.formattedDateTime}</td>
                 <td>${meal.description}</td>
                 <td>${meal.calories}</td>
+                <td><a href="meals?action = update&id=${meal.id}">Update</a> </td>
+                <td><a href="meal?action = delete&id =${meal.id}">Delete</a> </td>
+
             </tr>
         </c:forEach>
     </table>
