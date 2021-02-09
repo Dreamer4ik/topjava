@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class MealTo {
-    private Integer id;
+    private final Integer id;
 
     private final LocalDateTime dateTime;
 
@@ -13,7 +13,6 @@ public class MealTo {
     private final int calories;
 
     private final boolean excess;
-
 
     public MealTo(Integer id, LocalDateTime dateTime, String description, int calories, boolean excess) {
         this.id = id;
@@ -27,9 +26,18 @@ public class MealTo {
         return id;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    @Override
+    public String toString() {
+        return "MealTo{" +
+                "id=" + id +
+                ", dateTime=" + dateTime +
+                ", description='" + description + '\'' +
+                ", calories=" + calories +
+                ", excess=" + excess +
+                '}';
     }
+
+    public LocalDateTime getDateTime() {    return dateTime;    }
 
     public String getDescription() {
         return description;
@@ -43,20 +51,6 @@ public class MealTo {
         return excess;
     }
 
-
-    @Override
-    public String toString() {
-        return "MealTo{" +
-                "dateTime=" + dateTime +
-                ", description='" + description + '\'' +
-                ", calories=" + calories +
-                ", excess=" + excess +
-                '}';
-    }
-
-    public String getFormattedDateTime() {
-        return DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(this.dateTime);
-    }
 
 
     }

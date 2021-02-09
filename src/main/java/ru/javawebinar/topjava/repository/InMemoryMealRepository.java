@@ -16,22 +16,19 @@ public class InMemoryMealRepository implements MealRepository {
     {
         MealsUtil.MEAL_LIST.forEach(this::save);
     }
-
-
     @Override
     public Meal save(Meal meal) {
-        if (meal.isNew){
+        if (meal.isNew()){
             meal.setId(counter.incrementAndGet());
             repository.put(meal.getId(), meal);
             return meal;
-
         }
         return repository.computeIfPresent(meal.getId(), (id, oldMeal) -> meal);
     }
 
     @Override
     public boolean delete(int id) {
-        return repository.remove(id) != null;
+        return repository.remove(id) !=null;
     }
 
     @Override

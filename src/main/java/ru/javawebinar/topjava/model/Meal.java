@@ -13,8 +13,6 @@ public class Meal {
 
     private final int calories;
 
-    public boolean isNew;
-
     public Meal(LocalDateTime dateTime, String description, int calories) {
         this(null, dateTime, description, calories);
     }
@@ -25,7 +23,6 @@ public class Meal {
         this.description = description;
         this.calories = calories;
     }
-
 
     public Integer getId() {
         return id;
@@ -47,15 +44,19 @@ public class Meal {
         return calories;
     }
 
-    public LocalDate getDate() {
-        return dateTime.toLocalDate();
-    }
+    public LocalDate getDate()  {   return dateTime.toLocalDate();  }
 
-    public LocalTime getTime() {
-        return dateTime.toLocalTime();
-    }
+    public LocalTime getTime()  {   return dateTime.toLocalTime();  }
 
-    public boolean isNew() {
-        return id == null;
+    public boolean isNew() {    return id == null;  }
+
+    @Override
+    public String toString() {
+        return "Meal{" +
+                "id=" + id +
+                ", dateTime=" + dateTime +
+                ", description='" + description + '\'' +
+                ", calories=" + calories +
+                '}';
     }
 }
