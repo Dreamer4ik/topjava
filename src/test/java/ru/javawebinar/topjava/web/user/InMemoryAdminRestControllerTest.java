@@ -41,12 +41,12 @@ public class InMemoryAdminRestControllerTest {
 
     @Test
     public void delete() {
-        controller.delete(USER_ID);
+        repository.delete(USER_ID);
         Assert.assertNull(repository.get(USER_ID));
     }
 
     @Test
     public void deleteNotFound() {
-        Assert.assertThrows(NotFoundException.class, () -> controller.delete(NOT_FOUND));
+        Assert.assertThrows(NotFoundException.class, () -> controller.delete(10));
     }
 }

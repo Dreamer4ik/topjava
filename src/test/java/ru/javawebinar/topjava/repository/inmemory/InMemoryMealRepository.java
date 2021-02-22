@@ -10,6 +10,7 @@ import ru.javawebinar.topjava.util.Util;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Collections;
@@ -83,4 +84,12 @@ public class InMemoryMealRepository implements MealRepository {
                         .sorted(Comparator.comparing(Meal::getDateTime).reversed())
                         .collect(Collectors.toList());
     }
+    public List<Meal> getBetweenInclusive(LocalDate startDate, LocalDate endDate, int userId) {
+        return usersMealsMap.values().stream()
+                .map(user -> user.get(userId))
+                .filter(meal -> meal.getDate().isAfter(startDate) && meal.getDate().isBefore(endDate))
+                .collect(Collectors.toList());
+    }
+
+
 }
