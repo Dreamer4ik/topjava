@@ -10,14 +10,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.javawebinar.topjava.UserTestData;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.util.exception.NotFoundException;
-
 import java.util.List;
-
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThrows;
 import static ru.javawebinar.topjava.UserTestData.*;
 
@@ -44,59 +42,59 @@ public class UserServiceTest {
     private UserRepository repository;
 
     @Test
-    public void create() {
-        User created = service.create(getNew());
-        Integer newId = created.getId();
+    public void create() throws Exception {
         User newUser = getNew();
+        User created = service.create(newUser);
+        Integer newId = created.getId();
         newUser.setId(newId);
         assertMatch(created, newUser);
         assertMatch(service.get(newId), newUser);
     }
 
     @Test
-    public void duplicateMailCreate() {
+    public void duplicateMailCreate() throws Exception {
         assertThrows(DataAccessException.class, () ->
                 service.create(new User(null, "Duplicate", "user@yandex.ru", "newPass", Role.USER)));
     }
 
     @Test
-    public void delete() {
+    public void delete() throws Exception {
         service.delete(USER_ID);
-        assertThrows(NotFoundException.class, () -> service.get(USER_ID));
+        assertNull(repository.get(USER_ID));
     }
 
     @Test
-    public void deletedNotFound() {
+    public void deletedNotFound() throws Exception {
         assertThrows(NotFoundException.class, () -> service.delete(NOT_FOUND));
     }
 
     @Test
-    public void get() {
+    public void get() throws Exception {
         User user = service.get(USER_ID);
-        assertMatch(user, UserTestData.user);
+        assertMatch(user, USER);
     }
 
     @Test
-    public void getNotFound() {
+    public void getNotFound() throws Exception {
         assertThrows(NotFoundException.class, () -> service.get(NOT_FOUND));
     }
 
     @Test
-    public void getByEmail() {
+    public void getByEmail() throws Exception {
         User user = service.getByEmail("admin@gmail.com");
-        assertMatch(user, admin);
+        assertMatch(user, ADMIN);
     }
 
     @Test
-    public void update() {
+    public void update() throws Exception {
         User updated = getUpdated();
         service.update(updated);
-        assertMatch(service.get(USER_ID), getUpdated());
+        assertMatch(service.get(USER_ID), updated);
     }
 
     @Test
-    public void getAll() {
+    public void getAll() throws Exception {
         List<User> all = service.getAll();
-        assertMatch(all, admin, user);
+        assertMatch(all, ADMIN, USER);
     }
 }

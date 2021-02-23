@@ -1,20 +1,27 @@
 package ru.javawebinar.topjava.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
+import ru.javawebinar.topjava.repository.jdbc.JdbcUserRepository;
 
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFound;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
-@Service
+@Component("userService")
 public class UserService {
 
+
+    @Qualifier("jdbcUserRepository")
+    @Autowired
     private final UserRepository repository;
 
-    public UserService(UserRepository repository) {
+    public UserService(@Qualifier("jdbcUserRepository") JdbcUserRepository repository) {
         this.repository = repository;
     }
 

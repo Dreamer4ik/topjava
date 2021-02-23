@@ -1,6 +1,9 @@
 package ru.javawebinar.topjava.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
@@ -13,13 +16,19 @@ import static ru.javawebinar.topjava.util.DateTimeUtil.atStartOfDayOrMin;
 import static ru.javawebinar.topjava.util.DateTimeUtil.atStartOfNextDayOrMax;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
-@Service
+@Component("mealService")
 public class MealService {
 
+    @Qualifier("jdbcMealRepository")
+    @Autowired
     private final MealRepository repository;
 
-    public MealService(MealRepository repository) {
+    public MealService(@Qualifier("jdbcMealRepository") MealRepository repository) {
         this.repository = repository;
+    }
+
+    public MealRepository getRepository() {
+        return repository;
     }
 
     public Meal get(int id, int userId) {
