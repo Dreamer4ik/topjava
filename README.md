@@ -1,4 +1,5 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/b74e94045ec046909e0f71396ab1aad1)](https://www.codacy.com/gh/Dreamer4ik/topjava/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Dreamer4ik/topjava&amp;utm_campaign=Badge_Grade) [![Build Status](https://travis-ci.com/Dreamer4ik/topjava.svg?branch=master)](https://travis-ci.com/Dreamer4ik/topjava)
+
 Java Enterprise Online Project 
 ===============================
 Разработка полнофункционального Spring/JPA Enterprise приложения c авторизацией и правами доступа на основе ролей с использованием наиболее популярных инструментов и технологий Java: Maven, Spring MVC, Security, JPA(Hibernate), REST(Jackson), Bootstrap (css,js), datatables, jQuery + plugins, Java 8 Stream and Time API и хранением в базах данных Postgresql и HSQLDB.
