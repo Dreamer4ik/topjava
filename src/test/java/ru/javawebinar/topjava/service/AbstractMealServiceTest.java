@@ -36,33 +36,11 @@ import static ru.javawebinar.topjava.UserTestData.USER_ID;
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 @ActiveProfiles(resolver = Profiles.ActiveDbProfileResolver.class)
-public class MealServiceTest {
-    private static final Logger log = getLogger("result");
-
-    private static final StringBuilder results = new StringBuilder();
-
-    @Rule
-    // http://stackoverflow.com/questions/14892125/what-is-the-best-practice-to-determine-the-execution-time-of-the-bussiness-relev
-    public final Stopwatch stopwatch = new Stopwatch() {
-        @Override
-        protected void finished(long nanos, Description description) {
-            String result = String.format("\n%-25s %7d", description.getMethodName(), TimeUnit.NANOSECONDS.toMillis(nanos));
-            results.append(result);
-            log.info(result + " ms\n");
-        }
-    };
+public class AbstractMealServiceTest  extends AbstractServiceTest{
 
     @Autowired
     private MealService service;
 
-    @AfterClass
-    public static void printResult() {
-        log.info("\n---------------------------------" +
-                "\nTest                 Duration, ms" +
-                "\n---------------------------------" +
-                results +
-                "\n---------------------------------");
-    }
 
     @Test
     public void delete() {
