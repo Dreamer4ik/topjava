@@ -22,6 +22,7 @@ import ru.javawebinar.topjava.TimingRules;
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
 @ActiveProfiles(resolver = Profiles.ActiveDbProfileResolver.class)
 abstract public class AbstractServiceTest {
+
     @ClassRule
     public static ExternalResource summary = TimingRules.SUMMARY;
 
