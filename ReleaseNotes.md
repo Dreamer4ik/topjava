@@ -217,7 +217,7 @@
 - добавил
   - [выпускной проект](https://drive.google.com/open?id=0B9Ye2auQ_NsFcG83dEVDVTVMamc)
   - в таблицу meals составной индекс 
-  - константы `Profiles.ACTIVE_DB`, `Profiles.DB_IMPLEMENTATION`
+  - константы `ru.javawebinar.topjava.Profiles.ACTIVE_DB`, `ru.javawebinar.topjava.Profiles.DB_IMPLEMENTATION`
   - проверки и тесты на `NotFound` для `UserMealService.getWithUser` и  `UserService.getWithMeals`
   - в MockMvc фильтр CharacterEncodingFilter
   - защиту от межсайтовой подделки запроса, видео <a href="https://drive.google.com/open?id=0B9Ye2auQ_NsFNDlPZGdUNThzNUU">Межсайтовая подделка запроса (CSRF)</a>

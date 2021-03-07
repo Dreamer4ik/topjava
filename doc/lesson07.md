@@ -57,7 +57,7 @@ GROUP BY u.id
 #### Apply 7_07_controller_test.patch
 > - в `MockMvc` добавился `CharacterEncodingFilter`
 > - добавил `AllActiveProfileResolver`
-> - реализация Ehcache нетранзакционная, после отката транзакции в тестах по `@Transactional` Hibernate-кеш не восстанавливал роль для USER. Добавил очистку кэша Hibernate в `AbstractControllerTest.setUp` (с учетом того, что `Profiles.REPOSITORY_IMPLEMENTATION` можно переключить на `JDBC`).
+> - реализация Ehcache нетранзакционная, после отката транзакции в тестах по `@Transactional` Hibernate-кеш не восстанавливал роль для USER. Добавил очистку кэша Hibernate в `AbstractControllerTest.setUp` (с учетом того, что `ru.javawebinar.topjava.Profiles.REPOSITORY_IMPLEMENTATION` можно переключить на `JDBC`).
 
 -  <a href="https://github.com/hamcrest/hamcrest-junit">Hamcrest</a>
 -  <a href="http://www.petrikainulainen.net/programming/spring-framework/unit-testing-of-spring-mvc-controllers-normal-controllers/">Unit Testing of Spring MVC Controllers</a>

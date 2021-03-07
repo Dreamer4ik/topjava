@@ -17,7 +17,6 @@ public class JpaUserRepository implements UserRepository {
 /*
     @Autowired
     private SessionFactory sessionFactory;
-
     private Session openSession() {
         return sessionFactory.getCurrentSession();
     }
@@ -48,7 +47,6 @@ public class JpaUserRepository implements UserRepository {
 
 /*      User ref = em.getReference(User.class, id);
         em.remove(ref);
-
         Query query = em.createQuery("DELETE FROM User u WHERE u.id=:id");
         return query.setParameter("id", id).executeUpdate() != 0;
 */

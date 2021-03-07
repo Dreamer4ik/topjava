@@ -1,5 +1,5 @@
-package ru.javawebinar.topjava.service;
 
+package ru.javawebinar.topjava.service;
 
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -11,7 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringRunner;
-import ru.javawebinar.topjava.Profiles;
+import ru.javawebinar.topjava.ActiveDbProfileResolver;
 import ru.javawebinar.topjava.TimingRules;
 
 @ContextConfiguration({
@@ -20,9 +20,8 @@ import ru.javawebinar.topjava.TimingRules;
 })
 @RunWith(SpringRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
-@ActiveProfiles(resolver = Profiles.ActiveDbProfileResolver.class)
+@ActiveProfiles(resolver = ActiveDbProfileResolver.class)
 abstract public class AbstractServiceTest {
-
     @ClassRule
     public static ExternalResource summary = TimingRules.SUMMARY;
 

@@ -1,9 +1,5 @@
 package ru.javawebinar.topjava;
 
-import org.springframework.lang.NonNull;
-import org.springframework.test.context.ActiveProfilesResolver;
-import org.springframework.util.ClassUtils;
-
 public class Profiles {
     public static final String
             JDBC = "jdbc",
@@ -18,20 +14,21 @@ public class Profiles {
 
     //  Get DB profile depending of DB driver in classpath
     public static String getActiveDbProfile() {
-        if (ClassUtils.isPresent("org.postgresql.Driver", null)) {
+        if (isClassExists("org.postgresql.Driver")) {
             return POSTGRES_DB;
-        } else if (ClassUtils.isPresent("org.hsqldb.jdbcDriver", null)) {
+        } else if (isClassExists("org.hsqldb.jdbcDriver")) {
             return HSQL_DB;
         } else {
             throw new IllegalStateException("Could not find DB driver");
         }
     }
 
-    //http://stackoverflow.com/questions/23871255/spring-profiles-simple-example-of-activeprofilesresolver
-    public static class ActiveDbProfileResolver implements ActiveProfilesResolver {
-        @Override
-        public @NonNull String[] resolve(@NonNull Class<?> aClass) {
-            return new String[]{getActiveDbProfile()};
+    private static boolean isClassExists(String name) {
+        try {
+            Class.forName(name);
+            return true;
+        } catch (ClassNotFoundException ex) {
+            return false;
         }
     }
 }
