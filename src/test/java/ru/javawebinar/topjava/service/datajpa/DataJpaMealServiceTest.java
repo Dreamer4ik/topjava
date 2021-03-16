@@ -11,15 +11,15 @@ import ru.javawebinar.topjava.util.exception.NotFoundException;
 import static ru.javawebinar.topjava.MealTestData.*;
 import static ru.javawebinar.topjava.Profiles.DATAJPA;
 import static ru.javawebinar.topjava.UserTestData.ADMIN_ID;
-import static ru.javawebinar.topjava.UserTestData.admin;
+import static ru.javawebinar.topjava.UserTestData.ADMIN;
 
 @ActiveProfiles(DATAJPA)
 public class DataJpaMealServiceTest extends AbstractMealServiceTest {
     @Test
     public void getWithUser() {
         Meal adminMeal = service.getWithUser(ADMIN_MEAL_ID, ADMIN_ID);
-        MEAL_MATCHER.assertMatch(adminMeal, adminMeal1);
-        UserTestData.USER_MATCHER.assertMatch(adminMeal.getUser(), admin);
+        MEAL_MATCHER.assertMatch(adminMeal, ADMIN_MEAL1);
+        UserTestData.USER_MATCHER.assertMatch(adminMeal.getUser(), ADMIN);
     }
 
     @Test

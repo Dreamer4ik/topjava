@@ -59,7 +59,7 @@ public abstract class AbstractMealServiceTest extends AbstractServiceTest {
     @Test
     public void get() {
         Meal actual = service.get(ADMIN_MEAL_ID, ADMIN_ID);
-        MEAL_MATCHER.assertMatch(actual, adminMeal1);
+        MEAL_MATCHER.assertMatch(actual, ADMIN_MEAL1);
     }
 
     @Test
