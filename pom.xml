@@ -140,12 +140,7 @@
             <version>${spring-data-jpa.version}</version>
         </dependency>
 
-        <!--JSON-->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>${jackson-json.version}</version>
-        </dependency>
+
 
         <!--- ORM -->
         <dependency>
@@ -209,6 +204,13 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
+        </dependency>
+
+        <!--JSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-json.version}</version>
         </dependency>
 
         <!--Test-->
