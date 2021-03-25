@@ -19,6 +19,7 @@
         <spring.version>5.3.0</spring.version>
         <spring-data-jpa.version>2.4.0</spring-data-jpa.version>
         <tomcat.version>9.0.39</tomcat.version>
+        <jackson-json.version>2.11.1</jackson-json.version>
 
         <!-- Logging -->
         <logback.version>1.2.3</logback.version>
@@ -137,6 +138,13 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>${spring-data-jpa.version}</version>
+        </dependency>
+
+        <!--JSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-json.version}</version>
         </dependency>
 
         <!--- ORM -->
