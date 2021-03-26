@@ -87,7 +87,7 @@ public abstract class AbstractMealServiceTest extends AbstractServiceTest {
 
     @Test
     void getAll() {
-        MEAL_MATCHER.assertMatch(service.getAll(USER_ID), meals);
+        MEAL_MATCHER.assertMatch(service.getAll(USER_ID), MEALS);
     }
 
     @Test
@@ -100,7 +100,7 @@ public abstract class AbstractMealServiceTest extends AbstractServiceTest {
 
     @Test
     void getBetweenWithNullDates() {
-        MEAL_MATCHER.assertMatch(service.getBetweenInclusive(null, null, USER_ID), meals);
+        MEAL_MATCHER.assertMatch(service.getBetweenInclusive(null, null, USER_ID), MEALS);
     }
 
     @Test
