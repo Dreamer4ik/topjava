@@ -51,7 +51,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     @Test
     void get() {
         User user = service.get(ADMIN_ID);
-        USER_MATCHER.assertMatch(user, UserTestData.admin);
+        USER_MATCHER.assertMatch(user, UserTestData.ADMIN);
     }
 
     @Test
@@ -62,7 +62,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     @Test
     void getByEmail() {
         User user = service.getByEmail("admin@gmail.com");
-        USER_MATCHER.assertMatch(user, admin);
+        USER_MATCHER.assertMatch(user, ADMIN);
     }
 
     @Test
@@ -75,7 +75,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     @Test
     void getAll() {
         List<User> all = service.getAll();
-        USER_MATCHER.assertMatch(all, admin, user);
+        USER_MATCHER.assertMatch(all, ADMIN, USER);
     }
 
     @Test

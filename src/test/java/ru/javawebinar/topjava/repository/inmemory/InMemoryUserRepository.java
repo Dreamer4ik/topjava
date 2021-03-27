@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static ru.javawebinar.topjava.UserTestData.admin;
-import static ru.javawebinar.topjava.UserTestData.user;
+import static ru.javawebinar.topjava.UserTestData.ADMIN;
+import static ru.javawebinar.topjava.UserTestData.USER;
 
 
 @Repository
@@ -19,8 +19,8 @@ public class InMemoryUserRepository extends InMemoryBaseRepository<User> impleme
 
     public void init() {
         map.clear();
-        put(user);
-        put(admin);
+        put(USER);
+        put(ADMIN);
         counter.getAndSet(UserTestData.ADMIN_ID + 1);
     }
 
