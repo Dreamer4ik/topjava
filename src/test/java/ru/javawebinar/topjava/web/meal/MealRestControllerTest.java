@@ -24,7 +24,7 @@ import static ru.javawebinar.topjava.util.MealsUtil.createTo;
 import static ru.javawebinar.topjava.util.MealsUtil.getTos;
 
 
- class MealRestControllerTest extends AbstractControllerTest {
+class MealRestControllerTest extends AbstractControllerTest {
 
     private static final String REST_URL = MealRestController.REST_URL + '/';
 
@@ -47,7 +47,7 @@ import static ru.javawebinar.topjava.util.MealsUtil.getTos;
         perform(MockMvcRequestBuilders.delete(REST_URL + MEAL1_ID))
                 .andDo(print())
                 .andExpect(status().isNoContent());
-        assertThrows(NotFoundException.class, () -> mealService.get(MEAL1_ID,USER_ID));
+        assertThrows(NotFoundException.class, () -> mealService.get(MEAL1_ID, USER_ID));
     }
 
     @Test
@@ -60,19 +60,19 @@ import static ru.javawebinar.topjava.util.MealsUtil.getTos;
         MEAL_MATCHER.assertMatch(mealService.get(MEAL1_ID, START_SEQ), updated);
     }
 
-     @Test
-     void createWithLocation() throws Exception {
-         Meal newMeal = getNew();
-         ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
-                 .contentType(MediaType.APPLICATION_JSON)
-                 .content(JsonUtil.writeValue(newMeal)));
+    @Test
+    void createWithLocation() throws Exception {
+        Meal newMeal = getNew();
+        ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.writeValue(newMeal)));
 
-         Meal created = readFromJson(action, Meal.class);
-         int newId = created.id();
-         newMeal.setId(newId);
-         MEAL_MATCHER.assertMatch(created, newMeal);
-         MEAL_MATCHER.assertMatch(mealService.get(newId, USER_ID), newMeal);
-     }
+        Meal created = readFromJson(action, Meal.class);
+        int newId = created.id();
+        newMeal.setId(newId);
+        MEAL_MATCHER.assertMatch(created, newMeal);
+        MEAL_MATCHER.assertMatch(mealService.get(newId, USER_ID), newMeal);
+    }
 
     @Test
     void getAll() throws Exception {
@@ -84,10 +84,19 @@ import static ru.javawebinar.topjava.util.MealsUtil.getTos;
     }
 
     @Test
-    void getBetween() throws Exception {
-        perform(MockMvcRequestBuilders.get(REST_URL + "between?startDateTime=2020-01-30T07:00&endDateTime=2020-01-31T11:00:00"))
-                .andExpect(status().isOk())
+    void filter() throws Exception {
+        perform(MockMvcRequestBuilders.get(REST_URL + "filter")
+                .param("startDate", "2020-01-30").param("startTime", "07:00")
+                .param("endDate", "2020-01-31").param("endTime", "11:00"))
                 .andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(MEAL_TO_MATCHER.contentJson(createTo(meal5, true), createTo(meal1, false)));
+    }
+
+    @Test
+    void filterAll() throws Exception {
+        perform(MockMvcRequestBuilders.get(REST_URL + "filter?startDate=&endTime="))
+                .andExpect(status().isOk())
+                .andExpect(MEAL_TO_MATCHER.contentJson(getTos(MEALS, USER.getCaloriesPerDay())));
     }
 }
