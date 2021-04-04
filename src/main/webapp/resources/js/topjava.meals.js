@@ -1,30 +1,32 @@
-// $(document).ready(function () {
+function updateFilteredTable() {
+    $.ajax({
+        type: "GET",
+        url: "profile/meals/filter",
+        data: $("#filter").serialize()
+    }).done(updateTableByData);
+}
+
 $(function () {
     makeEditable({
-        ajaxUrl: "admin/users/",
+        ajaxUrl: "profile/meals/",
         datatableApi: $("#datatable").DataTable({
             "paging": false,
             "info": true,
             "columns": [
                 {
-                    "data": "name"
+                    "data": "dateTime"
                 },
                 {
-                    "data": "email"
+                    "data": "description"
                 },
                 {
-                    "data": "roles"
-                },
-                {
-                    "data": "enabled"
-                },
-                {
-                    "data": "registered"
+                    "data": "calories"
                 },
                 {
                     "defaultContent": "Edit",
                     "orderable": false
                 },
+
                 {
                     "defaultContent": "Delete",
                     "orderable": false
@@ -33,13 +35,10 @@ $(function () {
             "order": [
                 [
                     0,
-                    "asc"
+                    "desc"
                 ]
             ]
         }),
-        updateTable: function () {
-            $.get("admin/users/", updateTableByData);
-        }
-    }
-        );
+        updateTable: updateFilteredTable
+    });
 });
