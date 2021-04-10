@@ -25,14 +25,8 @@ function enable(chkbox, id) {
 
 // $(document).ready(function () {
 $(function () {
-    makeEditable(
-        $("#datatable").DataTable({
-            "ajax": {
-                "url": userAjaxUrl,
-                "dataSrc": ""
-            },
-            "paging": false,
-            "info": true,
+    makeEditable(userAjaxUrl, {
+
             "columns": [
                 {
                     "data": "name"
@@ -89,6 +83,7 @@ $(function () {
                     $(row).attr("data-userEnabled", false);
                 }
             }
-        })
-    );
+        }, function () {
+        $.get(userAjaxUrl, updateTableByData);
+    });
 });

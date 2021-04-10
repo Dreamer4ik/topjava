@@ -1,8 +1,21 @@
-let form;
+var ajaxUrl, datatableApi, updateTable, form;
 
-function makeEditable(datatableApi) {
-    ctx.datatableApi = datatableApi;
+function makeEditable(aUrl, datatableOpts, upTable) {
+    ajaxUrl = aUrl;
 
+    datatableApi = $("#datatable").DataTable(
+        // https://api.jquery.com/jquery.extend/#jQuery-extend-deep-target-object1-objectN
+        $.extend(true, datatableOpts,
+            {
+                "ajax": {
+                    "url": ajaxUrl,
+                    "dataSrc": ""
+                },
+                "paging": false,
+                "info": true
+            }
+            ));
+    updateTable = upTable;
     form = $('#detailsForm');
     $(document).ajaxError(function (event, jqXHR, options, jsExc) {
         failNoty(jqXHR);
@@ -21,7 +34,7 @@ function add() {
 function updateRow(id) {
     form.find(":input").val("");
     $("#modalTitle").html(i18n["editTitle"]);
-    $.get(ctx.ajaxUrl + id, function (data) {
+    $.get(ajaxUrl + id, function (data) {
         $.each(data, function (key, value) {
             form.find("input[name='" + key + "']").val(value);
         });
@@ -32,28 +45,28 @@ function updateRow(id) {
 function deleteRow(id) {
     if (confirm(i18n['common.confirm'])) {
         $.ajax({
-            url: ctx.ajaxUrl + id,
+            url: ajaxUrl + id,
             type: "DELETE"
         }).done(function () {
-            ctx.updateTable();
+            updateTable();
             successNoty("common.deleted");
         });
     }
 }
 
 function updateTableByData(data) {
-    ctx.datatableApi.clear().rows.add(data).draw();
+    datatableApi.clear().rows.add(data).draw();
 }
 
 function save() {
     const form = $("#detailsForm");
     $.ajax({
         type: "POST",
-        url: ctx.ajaxUrl,
+        url: ajaxUrl,
         data: form.serialize()
     }).done(function () {
         $("#editRow").modal("hide");
-        ctx.updateTable();
+        updateTable();
         successNoty("common.saved");
     });
 }

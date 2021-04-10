@@ -6,7 +6,7 @@ const ctx = {
     updateTable: function () {
         $.ajax({
             type: "GET",
-            url: "profile/meals/filter",
+            url: mealAjaxUrl + "filter",
             data: $("#filter").serialize()
         }).done(updateTableByData);
     }
@@ -14,39 +14,46 @@ const ctx = {
 
 function clearFilter() {
     $("#filter")[0].reset();
-    $.get("profile/meals/", updateTableByData);
+    $.get(mealAjaxUrl, updateTableByData);
 }
 
 $(function () {
-    makeEditable(
-        $("#datatable").DataTable({
-            "paging": false,
-            "info": true,
-            "columns": [
-                {
-                    "data": "dateTime"
-                },
-                {
-                    "data": "description"
-                },
-                {
-                    "data": "calories"
-                },
-                {
-                    "defaultContent": "Edit",
-                    "orderable": false
-                },
-                {
-                    "defaultContent": "Delete",
-                    "orderable": false
+    makeEditable(mealAjaxUrl, {
+        "columns": [
+            {
+                "data": "dateTime",
+                "render": function (date, type, row) {
+                    if (type === 'display') {
+                        return date.replace('T', '').substr(0, 16);
+                    }
+                    return date;
                 }
-            ],
-            "order": [
-                [
-                    0,
-                    "desc"
-                ]
+            },
+            {
+                "data": "description"
+            },
+            {
+                "data": "calories"
+            },
+            {
+                "render": renderEditBtn,
+                "defaultContent": "",
+                "orderable": false
+            },
+            {
+                "render": renderDeleteBtn,
+                "defaultContent": "",
+                "orderable": false
+            }
+        ],
+        "order": [
+            [
+                0,
+                "desc"
             ]
-        })
-    );
+        ],
+        "createdRow": function (row, data, dataIndex) {
+            $(row).attr("data-mealExcess", data.excess);
+        },
+    }, updateFilteredTable);
 });
