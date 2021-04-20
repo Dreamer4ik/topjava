@@ -56,11 +56,11 @@ public class ExceptionInfoHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ErrorInfo conflict(HttpServletRequest req, DataIntegrityViolationException e) {
         String rootMsg = ValidationUtil.getRootCause(e).getMessage();
-        if (rootMsg != null){
+        if (rootMsg != null) {
             String lowerCaseMsg = rootMsg.toLowerCase();
-            for (Map.Entry<String, String> entry : CONSTRAINS_I18N_MAP.entrySet()){
-                if (lowerCaseMsg.contains(entry.getKey())){
-                    return logAndGetErrorInfo(req, e ,false, VALIDATION_ERROR, messageSourceAccessor.getMessage(entry.getValue()));
+            for (Map.Entry<String, String> entry : CONSTRAINS_I18N_MAP.entrySet()) {
+                if (lowerCaseMsg.contains(entry.getKey())) {
+                    return logAndGetErrorInfo(req, e, false, VALIDATION_ERROR, messageSourceAccessor.getMessage(entry.getValue()));
                 }
             }
         }
@@ -71,7 +71,7 @@ public class ExceptionInfoHandler {
     @ExceptionHandler(BindException.class)
     public ErrorInfo bindValidationError(HttpServletRequest req, BindException e) {
         String[] details = e.getBindingResult().getFieldErrors().stream()
-                .map(fe -> String.format("[%s] %s", fe.getField(), fe.getDefaultMessage()))
+                .map(messageSourceAccessor::getMessage)
                 .toArray(String[]::new);
 
         return logAndGetErrorInfo(req, e, false, VALIDATION_ERROR, details);
