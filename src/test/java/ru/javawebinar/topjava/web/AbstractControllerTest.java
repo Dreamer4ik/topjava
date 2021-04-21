@@ -36,8 +36,9 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 @ActiveProfiles(resolver = AllActiveProfileResolver.class)
 public abstract class AbstractControllerTest {
 
-    private static final CharacterEncodingFilter CHARACTER_ENCODING_FILTER = new CharacterEncodingFilter();
+    private static final Locale RU_LOCALE = new Locale("ru");
 
+    private static final CharacterEncodingFilter CHARACTER_ENCODING_FILTER = new CharacterEncodingFilter();
 
 
     static {
@@ -73,13 +74,13 @@ public abstract class AbstractControllerTest {
         return mockMvc.perform(builder);
     }
 
-    private String getMessage(String code){
-        return  messageSourceAccessor.getMessage(code, Locale.ENGLISH);
+    private String getMessage(String code) {
+        return messageSourceAccessor.getMessage(code, RU_LOCALE);
 
     }
 
-    public ResultMatcher errorType (ErrorType type){
-        return  jsonPath("$.type").value(type.name());
+    public ResultMatcher errorType(ErrorType type) {
+        return jsonPath("$.type").value(type.name());
     }
 
     public ResultMatcher detailMessage(String code) {
