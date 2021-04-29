@@ -50,7 +50,7 @@ public class UserTestData {
         return updated;
     }
 
-    public static String jsonWithPassword(User user, String passw) {
+    public static String jsonWithPassword(Object user, String passw) {
         return JsonUtil.writeAdditionProps(user, "password", passw);
     }
 }

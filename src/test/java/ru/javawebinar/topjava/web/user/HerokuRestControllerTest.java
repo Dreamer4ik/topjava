@@ -57,7 +57,7 @@ class HerokuRestControllerTest extends AbstractControllerTest {
         perform(MockMvcRequestBuilders.put(REST_URL + USER_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .with(userHttpBasic(admin))
-                .content(UserTestData.jsonWithPassword(user, "password")))
+                .content(jsonWithPassword(user, "password")))
                 .andExpect(errorType(ErrorType.VALIDATION_ERROR))
                 .andExpect(detailMessage(EXCEPTION_UPDATE_RESTRICTION))
                 .andExpect(status().isUnprocessableEntity());

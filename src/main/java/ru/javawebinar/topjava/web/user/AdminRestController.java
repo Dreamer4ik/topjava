@@ -48,7 +48,7 @@ public class AdminRestController extends AbstractUserController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody User user, @PathVariable int id) throws BindException {
+    public void update(@Valid @RequestBody User user, @PathVariable int id) throws BindException {
         validateBeforeUpdate(user, id);
         log.info("update {} with id={}", user, id);
         service.update(user);
