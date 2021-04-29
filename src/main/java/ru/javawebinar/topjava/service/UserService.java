@@ -24,8 +24,8 @@ import ru.javawebinar.topjava.util.exception.UpdateRestrictionException;
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.UserUtil.prepareToSave;
-import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFound;
-import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
+import static ru.javawebinar.topjava.util.validation.ValidationUtil.checkNotFound;
+import static ru.javawebinar.topjava.util.validation.ValidationUtil.checkNotFoundWithId;
 
 @Service("userService")
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
